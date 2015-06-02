@@ -99,7 +99,7 @@ like this::
     def some_function():  # noqa
         ...
 
-    def another_function():  # pragma: no complexity
+    def another_function():  # pragma: no mccabe
         ...
 
 (both will work - ``# noqa`` is mainly there for `flake8`_ compatibility)
