@@ -1,5 +1,6 @@
-# coding=utf8
-pytest_plugins = "pytester",
+# vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
+
+pytest_plugins = "pytester",  # pylint: disable=invalid-name
 
 
 def test_too_complex(testdir):
@@ -58,6 +59,7 @@ def h():  # this will get checked
 
 
 def test_pep263(testdir):
-    testdir.makepyfile(b'\n# encoding=utf-8\n\nsnowman = "\xe2\x98\x83"\n'.decode("utf-8"))
+    testdir.makepyfile(b'\n# encoding=utf-8\n\nsnowman = '
+                       b'"\xe2\x98\x83"\n'.decode("utf-8"))
     result = testdir.runpytest("--mccabe")
     assert '1 passed in' in result.stdout.str()

@@ -1,0 +1,5 @@
+exclude .travis.yml
+exclude tox.ini
+
+include LICENSE
+include *.py
