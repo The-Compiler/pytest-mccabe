@@ -1,0 +1,7 @@
+/.cache/
+/.coverage
+/.tox/
+__pycache__/
+*.pyc
+/pytest_mccabe.egg-info/
+/venv/
