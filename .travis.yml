@@ -1,0 +1,21 @@
+sudo: no
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+
+env:
+ - PYTEST_VERSION=2.6.4
+ - PYTEST_VERSION=2.7.1
+
+install:
+  - pip install .
+  - pip uninstall -y pytest
+  - pip install pytest==$PYTEST_VERSION
+
+script:
+  - py.test test_mccabe.py
