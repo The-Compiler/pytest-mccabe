@@ -15,7 +15,11 @@ env:
 install:
   - pip install .
   - pip uninstall -y pytest
-  - pip install pytest==$PYTEST_VERSION
+  - pip install pytest==$PYTEST_VERSION tox
 
 script:
   - py.test test_mccabe.py
+  - tox -e pyflakes
+  - tox -e pep8
+  - tox -e pyroma
+  - tox -e check-manifest
