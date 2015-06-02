@@ -1,6 +1,9 @@
 pytest-mccabe
 =============
 
+.. image:: https://travis-ci.org/The-Compiler/pytest-mccabe.svg?branch=master
+    :target: https://travis-ci.org/The-Compiler/pytest-mccabe
+
 py.test plugin for checking cyclomatic complexity of python source with
 `mccabe`_.
 
