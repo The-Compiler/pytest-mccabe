@@ -96,7 +96,7 @@ like this::
     def some_function():  # noqa
         ...
 
-    def another_function():  # prgma: no complexity
+    def another_function():  # pragma: no complexity
         ...
 
 (both will work - ``# noqa`` is mainly there for `flake8`_ compatibility)
@@ -128,7 +128,7 @@ The repository of this plugin is at https://github.com/The-Compiler/pytest-mccab
 
 For more info on py.test see http://pytest.org
 
-The code is based on Florian Schulze's excellent `pytest-flakes_` - Thanks!
+The code is based on Florian Schulze's excellent `pytest-flakes`_ - Thanks!
 
 .. _pytest-flakes: https://pypi.python.org/pypi/pytest-flakes
 
