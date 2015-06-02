@@ -138,7 +138,7 @@ The code is based on Florian Schulze's excellent `pytest-flakes`_ - Thanks!
 Changes
 =======
 
-0.1 - Unreleased
-----------------
+0.1
+---
 
 - Initial release.
