@@ -58,6 +58,30 @@ def h():  # this will get checked
     assert 'passed' not in result.stdout.str()
 
 
+def test_config(testdir):
+    testdir.makeini("""
+[pytest]
+mccabe-complexity=
+    foo*.py 1
+    * 10
+""")
+
+    testdir.makepyfile(foobar="""
+def f():
+    for i in range(10):
+        print(i)
+""",
+                       fish="""
+def g():
+    for i in range(10):
+        print(i)
+""")
+    result = testdir.runpytest("--mccabe")
+    assert "'f' is too complex" in result.stdout.str()  # FIXME
+    assert "'g' is too complex" not in result.stdout.str()  # FIXME
+    assert '1 failed, 1 passed' in result.stdout.str()
+
+
 def test_pep263(testdir):
     testdir.makepyfile(b'\n# encoding=utf-8\n\nsnowman = '
                        b'"\xe2\x98\x83"\n'.decode("utf-8"))
