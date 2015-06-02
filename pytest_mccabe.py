@@ -100,8 +100,6 @@ class Complexities:
                 glob, val = line.split(None, 1)
             except ValueError:
                 glob, val = None, line
-            if glob:
-                glob, val = None, line
             self.complexities.append((glob, int(val)))
 
     def __call__(self, path):
