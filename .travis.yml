@@ -1,3 +1,4 @@
+sudo: no
 language: python
 
 python:
