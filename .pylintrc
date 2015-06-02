@@ -1,0 +1,20 @@
+# vim: ft=dosini fileencoding=utf-8:
+
+[MESSAGES CONTROL]
+disable=protected-access,
+        too-few-public-methods,
+        missing-docstring,
+        locally-disabled
+
+[BASIC]
+variable-rgx=[a-z_][a-z0-9_]{0,30}$
+
+[FORMAT]
+max-line-length=79
+ignore-long-lines=<?https?://
+
+[VARIABLES]
+dummy-variables-rgx=_.*
+
+[TYPECHECK]
+ignored-classes=McCabeItem,pytest,py
