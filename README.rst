@@ -26,7 +26,9 @@ starting from the command line arguments.
 Simple usage example
 --------------------
 
-Consider you have this (deliberately bad and complex) code::
+Consider you have this (deliberately bad and complex) code:
+
+.. code-block:: python
 
     # module.py
 
@@ -71,7 +73,9 @@ Configuring mccabe complexity per project and file
 
 You may configure the maximum complexity for your project
 by adding an ``mccabe-complexity`` entry to pytest config file (e.g.
-``setup.cfg``) like this::
+``setup.cfg``) like this:
+
+.. code-block:: ini
 
     [pytest]
     mccabe-complexity=15
@@ -83,7 +87,9 @@ Rerunning with the above example will now look better::
     1 passed in 0.00 seconds
 
 If you have some files where you want to set a higher complexity than the
-project-wide one, you can start a mccabe-complexity line with a glob-pattern::
+project-wide one, you can start a mccabe-complexity line with a glob-pattern:
+
+.. code-block:: ini
 
     [pytest]
     mccabe-complexity =
@@ -94,7 +100,9 @@ Ignoring certain functions
 --------------------------
 
 You can exclude certain functions from the complexity check by adding comments
-like this::
+like this:
+
+.. code-block:: python
 
     def some_function():  # noqa
         ...
