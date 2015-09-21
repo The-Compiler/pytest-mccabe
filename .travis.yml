@@ -10,7 +10,8 @@ python:
 
 env:
  - PYTEST_VERSION=2.6.4
- - PYTEST_VERSION=2.7.1
+ - PYTEST_VERSION=2.7.3
+ - PYTEST_VERSION=2.8.0
 
 install:
   - pip install .
