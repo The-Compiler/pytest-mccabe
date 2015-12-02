@@ -1,10 +1,10 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
 import _ast
-import py
 import sys
 import tokenize
 
+import py
 import pytest
 import mccabe
 
