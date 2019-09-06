@@ -150,3 +150,10 @@ Changes
 ---
 
 - Initial release.
+
+1.0
+---
+
+- Drop support for Python 2.6, 3.2, 3.3 and 3.4
+- Add support for Python 3.5, 3.6 and 3.7
+- Make this plugin compatible with pytest 4.x and 5.x

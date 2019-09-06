@@ -27,7 +27,7 @@ python_files=check_*.py
 for x in []
     pass
 """)
-    result = testdir.runpytest("--mccabe", "--ignore", testdir)
+    result = testdir.runpytest("--mccabe")
     assert "1: invalid syntax" in result.stdout.str()
     assert 'passed' not in result.stdout.str()
 
@@ -86,4 +86,4 @@ def test_pep263(testdir):
     testdir.makepyfile(b'\n# encoding=utf-8\n\nsnowman = '
                        b'"\xe2\x98\x83"\n'.decode("utf-8"))
     result = testdir.runpytest("--mccabe")
-    assert '1 passed in' in result.stdout.str()
+    assert '1 passed' in result.stdout.str()
