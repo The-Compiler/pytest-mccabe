@@ -28,7 +28,7 @@ setup(
     description='pytest plugin to run the mccabe code complexity checker.',
     long_description=open("README.rst").read(),
     license="MIT license",
-    version='0.1',
+    version='1.0',
     author='Florian Bruhin',
     author_email='me@the-compiler.org',
     url='https://github.com/The-Compiler/pytest-mccabe',
