@@ -24,6 +24,10 @@ def pytest_addoption(parser):
              "deactivate checking). example: *.py 10")
 
 
+def pytest_configure(config):
+    config.addinivalue_line('markers', 'mccabe: Tests that run mccabe')
+
+
 def pytest_sessionstart(session):
     config = session.config
     if config.option.mccabe:

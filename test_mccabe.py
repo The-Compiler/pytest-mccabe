@@ -87,3 +87,12 @@ def test_pep263(testdir):
                        b'"\xe2\x98\x83"\n'.decode("utf-8"))
     result = testdir.runpytest("--mccabe")
     assert '1 passed' in result.stdout.str()
+
+
+def test_strict(testdir):
+    testdir.makepyfile(test_foo="""
+def test_foo():
+    pass
+""")
+    result = testdir.runpytest("--strict")
+    assert result.ret == 0
