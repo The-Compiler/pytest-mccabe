@@ -1,6 +1,6 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-pytest_plugins = "pytester",  # pylint: disable=invalid-name
+pytest_plugins = ["pytester"]  # pylint: disable=invalid-name
 
 
 def test_too_complex(testdir):

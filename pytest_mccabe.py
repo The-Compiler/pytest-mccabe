@@ -1,12 +1,12 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-import _ast
 import sys
 import tokenize
 
 import py
 import pytest
 import mccabe
+import _ast
 
 
 HISTKEY = "mccabe/mtimes"
@@ -42,6 +42,7 @@ def pytest_collect_file(path, parent):
         complexity = config._mccabe_complexities(path)
         if complexity != 0:
             return McCabeItem(path, parent, complexity)
+    return None
 
 
 def pytest_sessionfinish(session):
@@ -81,10 +82,10 @@ class McCabeItem(pytest.Item, pytest.File):
         self.config._mccabe_mtimes[str(self.fspath)] = (self._mtime,
                                                         self.complexity)
 
-    def repr_failure(self, excinfo):
+    def repr_failure(self, excinfo, style=None):
         if excinfo.errisinstance(McCabeError):
             return excinfo.value.args[0]
-        return super(McCabeItem, self).repr_failure(excinfo)
+        return super(McCabeItem, self).repr_failure(excinfo, style)
 
     def reportinfo(self):
         return self.fspath, -1, "mccabe-check"

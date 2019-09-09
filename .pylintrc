@@ -4,7 +4,8 @@
 disable=protected-access,
         too-few-public-methods,
         missing-docstring,
-        locally-disabled
+        locally-disabled,
+        fixme
 
 [BASIC]
 variable-rgx=[a-z_][a-z0-9_]{0,30}$
