@@ -13,7 +13,7 @@ setup(
     url='https://github.com/The-Compiler/pytest-mccabe',
     py_modules=['pytest_mccabe'],
     entry_points={'pytest11': ['mccabe = pytest_mccabe']},
-    install_requires=['pytest-cache', 'pytest>=3.6.0', 'mccabe'],
+    install_requires=['pytest>=3.6.0', 'mccabe'],
     zip_safe=True,
     classifiers=[
         'Environment :: Plugins',
