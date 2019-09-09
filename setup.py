@@ -1,27 +1,6 @@
 import sys
 
 from setuptools import setup
-from setuptools.command.test import test as TestCommand
-
-
-class PyTest(TestCommand):
-    """
-    Overrides setup "test" command, taken from here:
-    http://pytest.org/latest/goodpractises.html
-    """
-
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        # import here, cause outside the eggs aren't loaded
-        import pytest
-
-        errno = pytest.main([])
-        sys.exit(errno)
-
 
 setup(
     name='pytest-mccabe',
@@ -52,6 +31,4 @@ setup(
         'Topic :: Software Development :: Testing',
     ],
     keywords='pytest plugin mccabe complexity',
-    tests_requires=['pytest'],
-    cmdclass={'test': PyTest},
 )
