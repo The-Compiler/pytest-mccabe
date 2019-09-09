@@ -158,3 +158,5 @@ Changes
 - Add support for Python 3.5, 3.6 and 3.7
 - Make this plugin compatible with pytest 4.x and 5.x
 - Drop support for "setup.py test"
+- Remove outdated pytest-cache dependency
+- Various code/CI cleanups
