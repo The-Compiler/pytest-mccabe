@@ -24,7 +24,6 @@ install:
 
 script:
   - py.test test_mccabe.py
-  - tox -e pyflakes
-  - tox -e pep8
+  - tox -e flake8
   - tox -e pyroma
   - tox -e check-manifest
