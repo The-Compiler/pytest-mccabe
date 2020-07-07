@@ -13,7 +13,6 @@ pytest plugin for checking cyclomatic complexity of python source with
 .. _@The-Compiler: https://github.com/The-Compiler
 .. _pytest-flake8: https://github.com/tholo/pytest-flake8
 .. _tox: https://tox.readthedocs.io/
-.. _flake8: https://flake8.pycqa.org/
 .. _arguments: https://github.com/The-Compiler/pytest-mccabe/issues/7#issuecomment-654698075
 
 Usage
