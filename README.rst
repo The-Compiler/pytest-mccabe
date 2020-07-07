@@ -4,10 +4,17 @@ pytest-mccabe
 .. image:: https://travis-ci.org/The-Compiler/pytest-mccabe.svg?branch=master
     :target: https://travis-ci.org/The-Compiler/pytest-mccabe
 
-py.test plugin for checking cyclomatic complexity of python source with
+pytest plugin for checking cyclomatic complexity of python source with
 `mccabe`_.
 
+**NOTE:** I (`@The-Compiler`_) stopped using this plugin in 2016. While I will still review pull requests and release new versions if needed by the community, I do not have the time to continue maintaining this plugin myself. You might want to consider switching to `pytest-flake8`_ or `tox`_ + `flake8`_ instead (see some `arguments`_ on why).
+
 .. _mccabe: https://pypi.python.org/pypi/mccabe/
+.. _@The-Compiler: https://github.com/The-Compiler
+.. _pytest-flake8: https://github.com/tholo/pytest-flake8
+.. _tox: https://tox.readthedocs.io/
+.. _flake8: https://flake8.pycqa.org/
+.. _arguments: https://github.com/The-Compiler/pytest-mccabe/issues/7#issuecomment-654698075
 
 Usage
 -----
@@ -18,7 +25,7 @@ install via::
 
 if you then type::
 
-    py.test --mccabe
+    pytest --mccabe
 
 every file ending in ``.py`` will be discovered and run through mccabe,
 starting from the command line arguments.
@@ -61,7 +68,7 @@ Consider you have this (deliberately bad and complex) code:
 Running py.test with pytest-mccabe installed shows you this function is
 considered too complex::
 
-   $ py.test -q --mccabe module.py
+   $ pytest -q --mccabe module.py
    F
    ============================== FAILURES ==============================
    ____________________________ mccabe-check ____________________________
@@ -82,7 +89,7 @@ by adding an ``mccabe-complexity`` entry to pytest config file (e.g.
 
 Rerunning with the above example will now look better::
 
-    $ py.test -q --mccabe foo.py
+    $ pytest -q --mccabe foo.py
     .
     1 passed in 0.00 seconds
 
@@ -121,7 +128,7 @@ Running mccabe checks and no other tests
 You can restrict your test run to only perform "mccabe" tests
 and not any other tests by typing::
 
-    py.test --mccabe -m mccabe
+    pytest --mccabe -m mccabe
 
 This will only run tests that are marked with the "mccabe" keyword
 which is added for the mccabe test items added by this plugin.
@@ -129,7 +136,7 @@ which is added for the mccabe test items added by this plugin.
 If you are using pytest < 2.4, then use the following invocation
 to the same effect::
 
-    py.test --mccabe -k mccabe
+    pytest --mccabe -k mccabe
 
 
 Notes
@@ -137,7 +144,7 @@ Notes
 
 The repository of this plugin is at https://github.com/The-Compiler/pytest-mccabe
 
-For more info on py.test see http://pytest.org
+For more info on pytest see https://pytest.org
 
 The code is based on Florian Schulze's excellent `pytest-flakes`_ - Thanks!
 
