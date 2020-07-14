@@ -41,7 +41,13 @@ def pytest_collect_file(path, parent):
     if config.option.mccabe and path.ext == '.py':
         complexity = config._mccabe_complexities(path)
         if complexity != 0:
-            return McCabeItem(path, parent, complexity)
+            if hasattr(McCabeItem, "from_parent"):
+                item =  McCabeItem.from_parent(parent,
+                                               fspath=path,
+                                               complexity=complexity)
+                return item
+            else:
+                return McCabeItem(path, parent, complexity)
     return None
 
 
@@ -57,14 +63,21 @@ class McCabeError(Exception):
 
 class McCabeItem(pytest.Item, pytest.File):
 
-    def __init__(self, path, parent, complexity):
-        super(McCabeItem, self).__init__(path, parent)
+    def __init__(self, fspath, parent, complexity):
+        super(McCabeItem, self).__init__(fspath, parent)
         self._mtime = None
         if hasattr(self, 'add_marker'):
             self.add_marker("mccabe")
         else:
             self.keywords["mccabe"] = True
         self.complexity = complexity
+
+    @classmethod
+    def from_parent(cls, parent, fspath, **kwargs):
+        complexity = kwargs.pop('complexity')
+        _self = getattr(super(), 'from_parent', cls)(parent, complexity=complexity, fspath=fspath)
+        _self.setup()
+        return _self
 
     def setup(self):
         mtimes = self.config._mccabe_mtimes
