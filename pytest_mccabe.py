@@ -41,13 +41,10 @@ def pytest_collect_file(path, parent):
     if config.option.mccabe and path.ext == '.py':
         complexity = config._mccabe_complexities(path)
         if complexity != 0:
-            if hasattr(McCabeItem, "from_parent"):
-                item =  McCabeItem.from_parent(parent,
-                                               fspath=path,
-                                               complexity=complexity)
-                return item
-            else:
-                return McCabeItem(path, parent, complexity)
+            item =  McCabeItem.from_parent(parent,
+                                           fspath=path,
+                                           complexity=complexity)
+            return item
     return None
 
 
