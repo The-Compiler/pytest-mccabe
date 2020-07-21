@@ -69,13 +69,6 @@ class McCabeItem(pytest.Item, pytest.File):
             self.keywords["mccabe"] = True
         self.complexity = complexity
 
-    @classmethod
-    def from_parent(cls, parent, fspath, **kwargs):
-        complexity = kwargs.pop('complexity')
-        _self = getattr(super(), 'from_parent', cls)(parent, complexity=complexity, fspath=fspath)
-        _self.setup()
-        return _self
-
     def setup(self):
         mtimes = self.config._mccabe_mtimes
         self._mtime = self.fspath.mtime()
