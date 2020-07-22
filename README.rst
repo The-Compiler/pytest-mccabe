@@ -64,7 +64,7 @@ Consider you have this (deliberately bad and complex) code:
         elif 0.9 <= num < 1:
             print("10")
 
-Running py.test with pytest-mccabe installed shows you this function is
+Running pytest with pytest-mccabe installed shows you this function is
 considered too complex::
 
    $ pytest -q --mccabe module.py
