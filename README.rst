@@ -166,3 +166,12 @@ Changes
 - Drop support for "setup.py test"
 - Remove outdated pytest-cache dependency
 - Various code/CI cleanups
+
+2.0
+---
+
+- Drop support for Python 2.7
+- Drop support for pytest < 5.4
+- Add support for Python 3.8 (no changes required)
+- Fix deprecation warnings with pytest >= 5.4 (thanks to Martin Thoma for the PR!)
+- Various code/CI cleanups
