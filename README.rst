@@ -12,7 +12,6 @@ pytest plugin for checking cyclomatic complexity of python source with
 .. _pre-commit: https://pre-commit.com/
 .. _prek: https://prek.j178.dev/
 .. _ruff: https://astral.sh/ruff
-.. _flake8: https://flake8.pycqa.org/en/latest/
 .. _arguments: https://github.com/The-Compiler/pytest-mccabe/issues/7#issuecomment-654698075
 
 Usage
