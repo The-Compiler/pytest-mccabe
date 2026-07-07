@@ -126,7 +126,9 @@ class Complexities:
 
     def __call__(self, path):
         for (glob, complexity) in self.complexities:
-            if not glob or fnmatch.fnmatch(str(path), glob):
+            path_text = str(path)
+            path_name = Path(path).name
+            if not glob or fnmatch.fnmatch(path_name, glob) or fnmatch.fnmatch(path_text, glob):
                 return complexity
         return self.DEFAULT_COMPLEXITY
 
@@ -142,8 +144,9 @@ def check_file(path, complexity):
     filename = str(path)
     try:
         tree = compile(code, filename, "exec", _ast.PyCF_ONLY_AST)
-    except SyntaxError:
-        return 1, get_syntax_error_msg(filename)
+    except SyntaxError as exc:
+        lineno = exc.lineno or 1
+        return 1, ["%s:%s: invalid syntax" % (filename, lineno)]
 
     errors = []
     checker = mccabe.McCabeChecker(tree, filename)
