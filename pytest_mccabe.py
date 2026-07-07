@@ -1,6 +1,8 @@
+import fnmatch
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
 import sys
+from pathlib import Path
 import tokenize
 
 import py
@@ -36,16 +38,15 @@ def pytest_sessionstart(session):
         config._mccabe_mtimes = config.cache.get(HISTKEY, {})
 
 
-def pytest_collect_file(path, parent):
+def pytest_collect_file(file_path, parent):
     config = parent.config
-    if config.option.mccabe and path.ext == '.py':
-        complexity = config._mccabe_complexities(path)
+    if config.option.mccabe and file_path.suffix == '.py':
+        complexity = config._mccabe_complexities(file_path)
         if complexity != 0:
-            return McCabeItem.from_parent(parent,
-                                          fspath=path,
+            return McCabeFile.from_parent(parent=parent,
+                                          path=file_path,
                                           complexity=complexity)
     return None
-
 
 def pytest_sessionfinish(session):
     config = session.config
@@ -57,10 +58,24 @@ class McCabeError(Exception):
     """ indicates an error during McCabe checks. """
 
 
-class McCabeItem(pytest.Item, pytest.File):
+class McCabeFile(pytest.File):
 
-    def __init__(self, fspath, parent, complexity):
-        super().__init__(fspath, parent)
+    def __init__(self, path, parent, complexity):
+        super().__init__(path=path, parent=parent)
+        self.complexity = complexity
+
+    def collect(self):
+        yield McCabeItem.from_parent(parent=self,
+                                     name=str(self.path),
+                                     path=self.path,
+                                     complexity=self.complexity)
+
+
+class McCabeItem(pytest.Item):
+
+    def __init__(self, name, parent, path, complexity):
+        super().__init__(name=name, parent=parent)
+        self.path = path
         self._mtime = None
         if hasattr(self, 'add_marker'):
             self.add_marker("mccabe")
@@ -70,27 +85,27 @@ class McCabeItem(pytest.Item, pytest.File):
 
     def setup(self):
         mtimes = self.config._mccabe_mtimes
-        self._mtime = self.fspath.mtime()
-        old = mtimes.get(str(self.fspath), 0)
+        self._mtime = self.path.stat().st_mtime
+        old = mtimes.get(str(self.path), 0)
         if old == (self._mtime, self.complexity):
             pytest.skip("file(s) previously passed McCabe checks")
 
     def runtest(self):
-        found_errors, out = check_file(self.fspath, self.complexity)
+        found_errors, out = check_file(str(self.path), self.complexity)
         if found_errors:
             raise McCabeError("\n".join(out))
         # update mtime only if test passed
         # otherwise failures would not be re-run next time
-        self.config._mccabe_mtimes[str(self.fspath)] = (self._mtime,
-                                                        self.complexity)
+        self.config._mccabe_mtimes[str(self.path)] = (self._mtime,
+                                                       self.complexity)
 
     def repr_failure(self, excinfo, style=None):
         if excinfo.errisinstance(McCabeError):
-            return excinfo.value.args[0]
+            return str(excinfo.value)
         return super().repr_failure(excinfo, style)
 
     def reportinfo(self):
-        return self.fspath, -1, "mccabe-check"
+        return self.path, -1, "mccabe-check"
 
 
 class Complexities:
@@ -111,19 +126,20 @@ class Complexities:
 
     def __call__(self, path):
         for (glob, complexity) in self.complexities:
-            if not glob or path.fnmatch(glob):
+            if not glob or fnmatch.fnmatch(str(path), glob):
                 return complexity
         return self.DEFAULT_COMPLEXITY
 
 
 def check_file(path, complexity):
+    path = Path(path)
     if not hasattr(tokenize, 'open'):
-        code = path.read()
+        code = path.read_text()
     else:
-        with tokenize.open(path.strpath) as f:
+        with tokenize.open(str(path)) as f:
             code = f.read()
 
-    filename = py.builtin._totext(path)
+    filename = str(path)
     try:
         tree = compile(code, filename, "exec", _ast.PyCF_ONLY_AST)
     except SyntaxError:
