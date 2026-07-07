@@ -1,18 +1,18 @@
 pytest-mccabe
 =============
 
-.. image:: https://travis-ci.org/The-Compiler/pytest-mccabe.svg?branch=master
-    :target: https://travis-ci.org/The-Compiler/pytest-mccabe
-
 pytest plugin for checking cyclomatic complexity of python source with
 `mccabe`_.
 
-**NOTE:** I (`@The-Compiler`_) stopped using this plugin in 2016. While I will still review pull requests and release new versions if needed by the community, I do not have the time to continue maintaining this plugin myself. You might want to consider switching to `pytest-flake8`_ or `tox`_ + `flake8`_ instead (see some `arguments`_ on why).
+**NOTE:** I (`@The-Compiler`_) stopped using this plugin in 2016 and archived the repo in 2026. You might want to consider switching to `tox`_ / `pre-commit`_ / `prek`_ + `ruff`_ / `flake8`_ instead (see some `arguments`_ on why).
 
 .. _mccabe: https://pypi.python.org/pypi/mccabe/
 .. _@The-Compiler: https://github.com/The-Compiler
-.. _pytest-flake8: https://github.com/tholo/pytest-flake8
 .. _tox: https://tox.readthedocs.io/
+.. _pre-commit: https://pre-commit.com/
+.. _prek: https://prek.j178.dev/
+.. _ruff: https://astral.sh/ruff
+.. _flake8: https://flake8.pycqa.org/en/latest/
 .. _arguments: https://github.com/The-Compiler/pytest-mccabe/issues/7#issuecomment-654698075
 
 Usage
